@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaCheckCircle, FaHardHat, FaTools, FaBuilding, FaPaintRoller, FaClipboardList, FaAward, FaClock, FaHandshake, FaShieldAlt } from 'react-icons/fa';
 
 const MugaseVenturesConstruction = () => {
@@ -373,18 +373,37 @@ const MugaseVenturesConstruction = () => {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {services.map((service, index) => (
-              <div 
+              <div
                 key={index}
-                className={`service-card bg-white p-8 shadow-lg hover:shadow-2xl border-t-4 border-amber-500 animate-scaleIn opacity-0 delay-${(index + 1) * 100}`}
+                className={`service-card p-8 shadow-lg hover:shadow-2xl border-t-4 animate-scaleIn opacity-0 delay-${(index + 1) * 100} cursor-pointer transition-all duration-300 ${
+                  activeService === index
+                    ? 'bg-amber-500 border-amber-700 scale-105'
+                    : 'bg-white border-amber-500'
+                }`}
                 onMouseEnter={() => setActiveService(index)}
+                onMouseLeave={() => setActiveService(-1)}
               >
-                <div className="text-amber-600 mb-6 transform transition-transform hover:scale-110">
+                <div className={`mb-6 transform transition-all duration-300 ${
+                  activeService === index ? 'scale-110 text-white' : 'text-amber-600'
+                }`}>
                   {service.icon}
                 </div>
-                <h3 className="text-2xl font-bold text-stone-900 mb-4">{service.title}</h3>
-                <p className="text-stone-600 leading-relaxed">{service.description}</p>
-                <div className="mt-6 pt-6 border-t border-stone-200">
-                  <a href="#contact" className="text-amber-600 font-bold hover:text-amber-700 transition-colors inline-flex items-center">
+                <h3 className={`text-2xl font-bold mb-4 transition-colors duration-300 ${
+                  activeService === index ? 'text-white' : 'text-stone-900'
+                }`}>
+                  {service.title}
+                </h3>
+                <p className={`leading-relaxed transition-colors duration-300 ${
+                  activeService === index ? 'text-stone-100' : 'text-stone-600'
+                }`}>
+                  {service.description}
+                </p>
+                <div className={`mt-6 pt-6 border-t transition-colors duration-300 ${
+                  activeService === index ? 'border-amber-300' : 'border-stone-200'
+                }`}>
+                  <a href="#contact" className={`font-bold transition-colors inline-flex items-center ${
+                    activeService === index ? 'text-white hover:text-stone-100' : 'text-amber-600 hover:text-amber-700'
+                  }`}>
                     Learn More →
                   </a>
                 </div>
@@ -438,7 +457,7 @@ const MugaseVenturesConstruction = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
+            {projects.map((project) => (
               <div key={project.id} className="project-card group cursor-pointer">
                 <div className="project-image relative">
                   <div className="project-overlay"></div>
